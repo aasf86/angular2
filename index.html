@@ -2,11 +2,13 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Learning angular2</title>        
+        <title>Learning angular2</title>   
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
         <script src="node_modules/systemjs/dist/system.src.js"></script>
         <script src="node_modules/rxjs/bundles/Rx.js"></script>
         <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
+        <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
         <script>
             System.config({
                 packages: {
@@ -25,7 +27,8 @@
             System.defaultJSExtensions = true;
             System.import('user');
         </script-->
-        
-        <my-app>Loading...</my-app>
+        <div class="container">
+            <my-app>Loading...</my-app>
+        </div>        
     </body>
 </html>
