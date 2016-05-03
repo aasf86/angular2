@@ -1,10 +1,10 @@
 {
-  "name": "angular2",
+  "name": "learning_angular2",
   "version": "1.0.0",
   "description": "aprendendo angular 2",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "live-server --port=12345"
   },
   "repository": {
     "type": "git",
@@ -14,9 +14,13 @@
     "angular2"
   ],
   "author": "aasf86",
-  "license": "MIT",
+  "license": "ISC",
   "bugs": {
     "url": "https://github.com/aasf86/angular2/issues"
   },
-  "homepage": "https://github.com/aasf86/angular2#readme"
+  "homepage": "https://github.com/aasf86/angular2#readme",
+  "dependencies": {
+    "angular2": "^2.0.0-beta.17",
+    "rxjs": "^5.0.0-beta.6"
+  }
 }
