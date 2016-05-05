@@ -9,8 +9,8 @@ System.register([], function(exports_1, context_1) {
                 function Config() {
                 }
                 /**
-                * Título da página da aplicação
-                */
+                 * Título da página da aplicação
+                 */
                 Config.TITLE_PAGE = "Play list do DAPI";
                 return Config;
             }());
