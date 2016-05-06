@@ -1,4 +1,4 @@
-System.register(['angular2/core', './config.service', './video', './videolist.component'], function(exports_1, context_1) {
+System.register(['angular2/core', './config.service', './video', './videolist.component', './videodetail.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', './config.service', './video', './videolist.co
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, config_service_1, video_1, videolist_component_1;
+    var core_1, config_service_1, video_1, videolist_component_1, videodetail_component_1;
     var AppComponent;
     return {
         setters:[
@@ -25,6 +25,9 @@ System.register(['angular2/core', './config.service', './video', './videolist.co
             },
             function (videolist_component_1_1) {
                 videolist_component_1 = videolist_component_1_1;
+            },
+            function (videodetail_component_1_1) {
+                videodetail_component_1 = videodetail_component_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
@@ -32,17 +35,19 @@ System.register(['angular2/core', './config.service', './video', './videolist.co
                     this.title = config_service_1.Config.TITLE_PAGE;
                     this.videos = [
                         new video_1.Video(1, "Test", "www.google.com.br", "Test no google"),
-                        new video_1.Video(2, "Test2", "www.tjmt.jus.br")
+                        new video_1.Video(2, "Test2", "www.tjmt.jus.br"),
+                        new video_1.Video(3, "Test3", "www.tjmt.jus.br3")
                     ];
                 }
                 AppComponent.prototype.onSelectVideo = function (video) {
-                    console.log(JSON.stringify(video));
+                    //--console.log(JSON.stringify(video));
+                    this.selectedVideo = video;
                 };
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
-                        template: "\n        <h1 class=\"jumbotron\">\n            {{title}}\n        </h1>\n        <video-list [videos]=\"videos\" (selectVideo)=\"onSelectVideo($event)\"></video-list>    \n    ",
-                        directives: [videolist_component_1.VideoListComponent]
+                        directives: [videolist_component_1.VideoListComponent, videodetail_component_1.VideoDetailComponent],
+                        template: "\n        <h1 class=\"jumbotron\">\n            {{title}}\n        </h1>\n        <video-list [videos]=\"videos\" (selectVideo)=\"onSelectVideo($event)\"></video-list>\n        <video-detail *ngIf=\"selectedVideo\" [video]=\"selectedVideo\"></video-detail>            \n    "
                     }), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);

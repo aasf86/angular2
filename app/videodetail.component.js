@@ -11,34 +11,28 @@ System.register(['angular2/core'], function(exports_1, context_1) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1;
-    var VideoListComponent;
+    var VideoDetailComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             }],
         execute: function() {
-            VideoListComponent = (function () {
-                function VideoListComponent() {
-                    this.selectVideo = new core_1.EventEmitter();
+            VideoDetailComponent = (function () {
+                function VideoDetailComponent() {
                 }
-                VideoListComponent.prototype.onSelect = function (itemVideo) {
-                    //console.log(JSON.stringify(vid));
-                    this.selectVideo.next(itemVideo);
-                };
-                VideoListComponent = __decorate([
+                VideoDetailComponent = __decorate([
                     core_1.Component({
-                        selector: 'video-list',
-                        template: "\n        <table class=\"table\">\n            <thead>\n                <tr>\n                    <th>ID</th>\n                    <th>Title</th>\n                </tr>\n            </thead>\n            <tbody>\n                <tr *ngFor=\"#v of videos\" (click)=\"onSelect(v)\">\n                    <td>{{v.id}}</td>\n                    <td>{{v.title}}</td>\n                </tr>\n            </tbody>\n        </table>\n        ",
-                        inputs: ['videos'],
-                        outputs: ['selectVideo']
+                        selector: 'video-detail',
+                        template: "\n        <h2>{{video.title}}</h2>\n    ",
+                        inputs: ['video']
                     }), 
                     __metadata('design:paramtypes', [])
-                ], VideoListComponent);
-                return VideoListComponent;
+                ], VideoDetailComponent);
+                return VideoDetailComponent;
             }());
-            exports_1("VideoListComponent", VideoListComponent);
+            exports_1("VideoDetailComponent", VideoDetailComponent);
         }
     }
 });
-//# sourceMappingURL=videolist.component.js.map
+//# sourceMappingURL=videodetail.component.js.map

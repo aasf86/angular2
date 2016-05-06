@@ -1,7 +1,7 @@
 import {
     Component, 
     EventEmitter
-} from 'angular2/core'
+} from 'angular2/core';
 
 import {Video} from './video'
 
@@ -29,7 +29,8 @@ import {Video} from './video'
 
 export class VideoListComponent {
     selectVideo = new EventEmitter();
-    onSelect(vid:Video) {
-        console.log(JSON.stringify(vid));        
-    }    
+    onSelect(itemVideo:Video) {
+        //console.log(JSON.stringify(vid));
+        this.selectVideo.next(itemVideo);
+    }
 }
