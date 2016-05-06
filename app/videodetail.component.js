@@ -21,6 +21,7 @@ System.register(['angular2/core'], function(exports_1, context_1) {
             VideoDetailComponent = (function () {
                 function VideoDetailComponent() {
                     this.editTitle = false;
+                    this.closeForm = new core_1.EventEmitter();
                     this.editTitle = false;
                 }
                 VideoDetailComponent.prototype.onTitleClick = function () {
@@ -28,12 +29,20 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 };
                 VideoDetailComponent.prototype.onButtonOkClick = function () {
                     this.editTitle = false;
+                    this.closeForm.next({});
+                };
+                VideoDetailComponent.prototype.ngOnChanges = function () {
+                    this.editTitle = false;
+                };
+                VideoDetailComponent.prototype.onButtonCancelClick = function () {
+                    this.closeForm.next({});
                 };
                 VideoDetailComponent = __decorate([
                     core_1.Component({
                         selector: 'video-detail',
                         inputs: ['video'],
-                        template: "\n        <div class=\"row\">\n            <div class=\"col-md-4\">\n                <iframe width=\"100%\" height=\"300\" src=\"{{video.url}}\"></iframe>\n            </div>\n            <div class=\"col-md-8\">\n                <form>                    \n                    <h3 *ngIf=\"!editTitle\" (click)=\"onTitleClick()\">{{video.title}}</h3>\n                    <div *ngIf=\"editTitle\" class=\"form-group\">\n                        <input type=\"input\" class=\"form-control\" id=\"title\" required placeholder=\"title\" [(ngModel)]=\"video.title\">\n                    </div>\n                    <div class=\"form-group\">\n                        <input type=\"input\" class=\"form-control\" id=\"url\" required placeholder=\"url\" [(ngModel)]=\"video.url\">\n                    </div>\n                    <div class=\"form-group\">\n                        <textarea class=\"form-control\" rows=\"5\" [(ngModel)]=\"video.desc\"></textarea>\n                    </div>\n                    <button type=\"button\" class=\"btn btn-default\" (click)=\"onButtonOkClick()\">Ok</button>\n                </form>\n            </div>\n        </div>\n    "
+                        outputs: ['closeForm'],
+                        template: "\n        <style>\n            .h3Cursor {\n                cursor:pointer;                \n            }\n        </style>    \n        <div class=\"row\">\n            <div class=\"col-md-4\">\n                <iframe width=\"100%\" height=\"300\" src=\"{{video.url}}\"></iframe>\n            </div>\n            <div class=\"col-md-8\">\n                <form>                    \n                    <h3 class=\"h3Cursor\" *ngIf=\"!editTitle\" (click)=\"onTitleClick()\">{{video.title}}</h3>\n                    <div *ngIf=\"editTitle\" class=\"form-group\">\n                        <input type=\"input\" class=\"form-control\" id=\"title\" required placeholder=\"title\" [(ngModel)]=\"video.title\">\n                    </div>\n                    <div class=\"form-group\">\n                        <input type=\"input\" class=\"form-control\" id=\"url\" required placeholder=\"url\" [(ngModel)]=\"video.url\">\n                    </div>\n                    <div class=\"form-group\">\n                        <textarea class=\"form-control\" rows=\"5\" [(ngModel)]=\"video.desc\"></textarea>\n                    </div>\n                    <button type=\"button\" class=\"btn btn-success\" (click)=\"onButtonOkClick()\">Ok</button>\n                    <button type=\"button\" class=\"btn btn-danger\" (click)=\"onButtonCancelClick()\">Cancelar</button>\n                </form>\n            </div>\n        </div>\n    "
                     }), 
                     __metadata('design:paramtypes', [])
                 ], VideoDetailComponent);

@@ -47,11 +47,16 @@ System.register(['angular2/core', './config.service', './video', './videolist.co
                     itemVideo["selected"] = true;
                     this.selectedVideo = itemVideo;
                 };
+                AppComponent.prototype.onCloseDetailForm = function (event) {
+                    console.log('fechando...');
+                    this.selectedVideo = null;
+                    this.videos.forEach(function (item) { item["selected"] = false; });
+                };
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
                         directives: [videolist_component_1.VideoListComponent, videodetail_component_1.VideoDetailComponent],
-                        template: "\n        <h1 class=\"jumbotron\">\n            {{title}}\n        </h1>\n        <video-list [videos]=\"videos\" (selectVideo)=\"onSelectVideo($event)\"></video-list>\n        <video-detail *ngIf=\"selectedVideo\" [video]=\"selectedVideo\"></video-detail>            \n    "
+                        template: "\n        <h1 class=\"jumbotron\">\n            {{title}}\n        </h1>\n        <video-list [videos]=\"videos\" (selectVideo)=\"onSelectVideo($event)\"></video-list>\n        <video-detail *ngIf=\"selectedVideo\" [video]=\"selectedVideo\" (closeForm)=\"onCloseDetailForm($event)\"></video-detail>            \n    "
                     }), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);

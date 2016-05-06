@@ -19,14 +19,16 @@ import {Video} from './video'
         <table class="table">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Title</th>
+                    <th>#ID</th>
+                    <th>Titulo</th>
+                    <th>Autor</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="#v of videos" (click)="onSelect(v)" class='{{v["selected"] ? "info howTr" : "howTr" }}'>
                     <td>{{v.id}}</td>
                     <td>{{v.title}}</td>
+                    <td>{{v.desc}}</td>
                 </tr>
             </tbody>
         </table>

@@ -12,7 +12,7 @@ import {VideoDetailComponent} from './videodetail.component';
             {{title}}
         </h1>
         <video-list [videos]="videos" (selectVideo)="onSelectVideo($event)"></video-list>
-        <video-detail *ngIf="selectedVideo" [video]="selectedVideo"></video-detail>            
+        <video-detail *ngIf="selectedVideo" [video]="selectedVideo" (closeForm)="onCloseDetailForm($event)"></video-detail>            
     `
 })
 
@@ -37,5 +37,11 @@ export class AppComponent
         });
         itemVideo["selected"] = true;        
         this.selectedVideo = itemVideo;
-    }    
+    }
+    
+    onCloseDetailForm(event){
+        console.log('fechando...');
+        this.selectedVideo = null;
+        this.videos.forEach(item => { item["selected"] = false; });        
+    }      
 }
