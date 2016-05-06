@@ -1,7 +1,9 @@
-export class Video{
+
+export class Video {
+    [key:string]:any
     id:number;
     title:string;
-    url:string;
+    url:string;    
     desc:string;
     constructor(id:number,title:string,url:string,desc?:string){
         this.id=id;

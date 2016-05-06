@@ -30,8 +30,12 @@ export class AppComponent
         ];
     }
     
-    onSelectVideo(video:Video){
+    onSelectVideo(itemVideo:Video){
         //--console.log(JSON.stringify(video));
-        this.selectedVideo = video;
+        this.videos.forEach(item => {
+            item["selected"] = false;
+        });
+        itemVideo["selected"] = true;        
+        this.selectedVideo = itemVideo;
     }    
 }

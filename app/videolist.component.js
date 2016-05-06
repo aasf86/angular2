@@ -23,13 +23,13 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                     this.selectVideo = new core_1.EventEmitter();
                 }
                 VideoListComponent.prototype.onSelect = function (itemVideo) {
-                    //console.log(JSON.stringify(vid));
+                    //console.log(JSON.stringify(vid));        
                     this.selectVideo.next(itemVideo);
                 };
                 VideoListComponent = __decorate([
                     core_1.Component({
                         selector: 'video-list',
-                        template: "\n        <table class=\"table\">\n            <thead>\n                <tr>\n                    <th>ID</th>\n                    <th>Title</th>\n                </tr>\n            </thead>\n            <tbody>\n                <tr *ngFor=\"#v of videos\" (click)=\"onSelect(v)\">\n                    <td>{{v.id}}</td>\n                    <td>{{v.title}}</td>\n                </tr>\n            </tbody>\n        </table>\n        ",
+                        template: "\n        <style>\n            .howTr {\n                cursor:pointer;                \n            }\n            .howTr:hover{\n                background-color: #fcf8e3 !important;\n            }\n        </style>\n        <table class=\"table\">\n            <thead>\n                <tr>\n                    <th>ID</th>\n                    <th>Title</th>\n                </tr>\n            </thead>\n            <tbody>\n                <tr *ngFor=\"#v of videos\" (click)=\"onSelect(v)\" class='{{v[\"selected\"] ? \"info howTr\" : \"howTr\" }}'>\n                    <td>{{v.id}}</td>\n                    <td>{{v.title}}</td>\n                </tr>\n            </tbody>\n        </table>\n        ",
                         inputs: ['videos'],
                         outputs: ['selectVideo']
                     }), 

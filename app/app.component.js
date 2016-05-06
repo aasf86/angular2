@@ -39,9 +39,13 @@ System.register(['angular2/core', './config.service', './video', './videolist.co
                         new video_1.Video(3, "Bower", "https://www.youtube.com/embed/ZA06skH73gg", "Rodrigo Branas (Bower)")
                     ];
                 }
-                AppComponent.prototype.onSelectVideo = function (video) {
+                AppComponent.prototype.onSelectVideo = function (itemVideo) {
                     //--console.log(JSON.stringify(video));
-                    this.selectedVideo = video;
+                    this.videos.forEach(function (item) {
+                        item["selected"] = false;
+                    });
+                    itemVideo["selected"] = true;
+                    this.selectedVideo = itemVideo;
                 };
                 AppComponent = __decorate([
                     core_1.Component({

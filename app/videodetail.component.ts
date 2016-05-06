@@ -10,8 +10,11 @@ import {Video} from './video';
                 <iframe width="100%" height="300" src="{{video.url}}"></iframe>
             </div>
             <div class="col-md-8">
-                <form>
-                    <h3>{{video.title}}</h3>
+                <form>                    
+                    <h3 *ngIf="!editTitle" (click)="onTitleClick()">{{video.title}}</h3>
+                    <div *ngIf="editTitle" class="form-group">
+                        <input type="input" class="form-control" id="title" required placeholder="title" [(ngModel)]="video.title">
+                    </div>
                     <div class="form-group">
                         <input type="input" class="form-control" id="url" required placeholder="url" [(ngModel)]="video.url">
                     </div>
@@ -27,4 +30,16 @@ import {Video} from './video';
 
 export class VideoDetailComponent{
     video:Video;
+    private editTitle:boolean = false;
+    
+    constructor(){
+        this.editTitle = false;
+    }
+    onTitleClick(){
+        this.editTitle = true;
+    }
+    onButtonOkClick(){
+        this.editTitle = false;
+    }
+
 }

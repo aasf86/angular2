@@ -8,6 +8,14 @@ import {Video} from './video'
 @Component({
     selector: 'video-list',
     template: `
+        <style>
+            .howTr {
+                cursor:pointer;                
+            }
+            .howTr:hover{
+                background-color: #fcf8e3 !important;
+            }
+        </style>
         <table class="table">
             <thead>
                 <tr>
@@ -16,7 +24,7 @@ import {Video} from './video'
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="#v of videos" (click)="onSelect(v)">
+                <tr *ngFor="#v of videos" (click)="onSelect(v)" class='{{v["selected"] ? "info howTr" : "howTr" }}'>
                     <td>{{v.id}}</td>
                     <td>{{v.title}}</td>
                 </tr>
@@ -30,7 +38,7 @@ import {Video} from './video'
 export class VideoListComponent {
     selectVideo = new EventEmitter();
     onSelect(itemVideo:Video) {
-        //console.log(JSON.stringify(vid));
+        //console.log(JSON.stringify(vid));        
         this.selectVideo.next(itemVideo);
     }
 }
