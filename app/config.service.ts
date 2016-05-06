@@ -2,5 +2,5 @@ export class Config {
    /**
     * Título da página da aplicação
     */
-    static TITLE_PAGE : string = "Play list do DAPI";
+    static TITLE_PAGE : string = "Playlist do DAPI";
 }

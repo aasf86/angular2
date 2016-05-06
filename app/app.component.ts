@@ -12,7 +12,11 @@ import {VideoDetailComponent} from './videodetail.component';
             {{title}}
         </h1>
         <video-list [videos]="videos" (selectVideo)="onSelectVideo($event)"></video-list>
-        <video-detail *ngIf="selectedVideo" [video]="selectedVideo" (closeForm)="onCloseDetailForm($event)"></video-detail>            
+        <video-detail *ngIf="selectedVideo" [video]="selectedVideo" (closeForm)="onCloseDetailForm($event)"></video-detail>
+        <video-detail *ngIf="adicionando" [video]="newVideo" (closeForm)="onCloseAddForm($event)"></video-detail>
+        <button ngShow="!adicionando" type="button" class="btn btn-primary" (click)="onAddVideo()">
+            <i class="glyphicon glyphicon-plus"></i>&nbsp;Novo
+        </button>
     `
 })
 
@@ -21,6 +25,8 @@ export class AppComponent
     title = Config.TITLE_PAGE;
     videos:Array<Video>;
     selectedVideo:Video;
+    adicionando:boolean = false;
+    newVideo:Video;
     
     constructor(){
         this.videos = [
@@ -43,5 +49,13 @@ export class AppComponent
         console.log('fechando...');
         this.selectedVideo = null;
         this.videos.forEach(item => { item["selected"] = false; });        
-    }      
+    }
+    
+    onCloseAddForm(event){
+        
+    }
+    onAddVideo(){
+        this.adicionando = true;
+        this.newVideo = new Video(0,'','');
+    }
 }

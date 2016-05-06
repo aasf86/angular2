@@ -33,6 +33,7 @@ System.register(['angular2/core', './config.service', './video', './videolist.co
             AppComponent = (function () {
                 function AppComponent() {
                     this.title = config_service_1.Config.TITLE_PAGE;
+                    this.adicionando = false;
                     this.videos = [
                         new video_1.Video(1, "Git", "https://www.youtube.com/embed/C18qzn7j4SM", "Rodrigo Branas (git)"),
                         new video_1.Video(2, "Gulp vs Grunt", "https://www.youtube.com/embed/ZG0fSXOKcGM", "Rodrigo Branas (Gulp vs Grunt)"),
@@ -52,11 +53,17 @@ System.register(['angular2/core', './config.service', './video', './videolist.co
                     this.selectedVideo = null;
                     this.videos.forEach(function (item) { item["selected"] = false; });
                 };
+                AppComponent.prototype.onCloseAddForm = function (event) {
+                };
+                AppComponent.prototype.onAddVideo = function () {
+                    this.adicionando = true;
+                    this.newVideo = new video_1.Video(0, '', '');
+                };
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
                         directives: [videolist_component_1.VideoListComponent, videodetail_component_1.VideoDetailComponent],
-                        template: "\n        <h1 class=\"jumbotron\">\n            {{title}}\n        </h1>\n        <video-list [videos]=\"videos\" (selectVideo)=\"onSelectVideo($event)\"></video-list>\n        <video-detail *ngIf=\"selectedVideo\" [video]=\"selectedVideo\" (closeForm)=\"onCloseDetailForm($event)\"></video-detail>            \n    "
+                        template: "\n        <h1 class=\"jumbotron\">\n            {{title}}\n        </h1>\n        <video-list [videos]=\"videos\" (selectVideo)=\"onSelectVideo($event)\"></video-list>\n        <video-detail *ngIf=\"selectedVideo\" [video]=\"selectedVideo\" (closeForm)=\"onCloseDetailForm($event)\"></video-detail>\n        <video-detail *ngIf=\"adicionando\" [video]=\"newVideo\" (closeForm)=\"onCloseAddForm($event)\"></video-detail>\n        <button ngShow=\"!adicionando\" type=\"button\" class=\"btn btn-primary\" (click)=\"onAddVideo()\">\n            <i class=\"glyphicon glyphicon-plus\"></i>&nbsp;Novo\n        </button>\n    "
                     }), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);
