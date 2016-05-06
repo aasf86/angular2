@@ -4,7 +4,14 @@ import {Video} from './video';
 import {VideoListComponent} from './videolist.component';
 import {VideoDetailComponent} from './videodetail.component';
 
-@Component({
+enum EstadoTela
+{
+    Fechado,
+    Novo,
+    Editando
+}
+
+@Component({    
     selector: 'my-app',
     directives: [VideoListComponent,VideoDetailComponent],
     template: `
@@ -12,9 +19,9 @@ import {VideoDetailComponent} from './videodetail.component';
             {{title}}
         </h1>
         <video-list [videos]="videos" (selectVideo)="onSelectVideo($event)"></video-list>
-        <video-detail *ngIf="selectedVideo" [video]="selectedVideo" (closeForm)="onCloseDetailForm($event)"></video-detail>
-        <video-detail *ngIf="adicionando" [video]="newVideo" (closeForm)="onCloseAddForm($event)"></video-detail>
-        <button ngShow="!adicionando" type="button" class="btn btn-primary" (click)="onAddVideo()">
+        <video-detail *ngIf="showEditando" [video]="selectedVideo" (close)="onCloseDetailForm($event)"></video-detail>
+        <video-detail *ngIf="showNovo" [video]="newVideo" (close)="onCloseAddForm($event)"></video-detail>
+        <button *ngIf="showButtonNovo" type="button" class="btn btn-primary" (click)="onAddVideo()">
             <i class="glyphicon glyphicon-plus"></i>&nbsp;Novo
         </button>
     `
@@ -26,7 +33,20 @@ export class AppComponent
     videos:Array<Video>;
     selectedVideo:Video;
     adicionando:boolean = false;
-    newVideo:Video;
+    newVideo:Video;    
+    estado:EstadoTela = EstadoTela.Fechado;
+    
+    get showNovo(){
+        return this.estado == EstadoTela.Novo; 
+    }
+    
+    get showEditando(){
+        return this.estado == EstadoTela.Editando; 
+    }    
+    
+    get showButtonNovo(){
+        return this.estado == EstadoTela.Fechado; 
+    } 
     
     constructor(){
         this.videos = [
@@ -41,20 +61,24 @@ export class AppComponent
         this.videos.forEach(item => {
             item["selected"] = false;
         });
-        itemVideo["selected"] = true;        
+        itemVideo["selected"] = true;
+        this.estado = EstadoTela.Editando;    
         this.selectedVideo = itemVideo;
     }
     
     onCloseDetailForm(event){
         console.log('fechando...');
         this.selectedVideo = null;
-        this.videos.forEach(item => { item["selected"] = false; });        
+        this.videos.forEach(item => { item["selected"] = false; });
+        this.estado = EstadoTela.Fechado;       
     }
     
     onCloseAddForm(event){
-        
+        this.adicionando = false;
+        this.estado = EstadoTela.Fechado;
     }
     onAddVideo(){
+        this.estado = EstadoTela.Novo;
         this.adicionando = true;
         this.newVideo = new Video(0,'','');
     }

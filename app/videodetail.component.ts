@@ -1,10 +1,8 @@
-import {Component,EventEmitter} from 'angular2/core';
+import {Component,EventEmitter,Input,Output,OnInit} from 'angular2/core';
 import {Video} from './video';
 
 @Component({
     selector:'video-detail',    
-    inputs: ['video'],
-    outputs: ['closeForm'],
     template: `
         <style>
             .h3Cursor {
@@ -17,8 +15,8 @@ import {Video} from './video';
             </div>
             <div class="col-md-8">
                 <form>                    
-                    <h3 class="h3Cursor" *ngIf="!editTitle" (click)="onTitleClick()">{{video.title}}</h3>
-                    <div *ngIf="editTitle" class="form-group">
+                    <h3 class="h3Cursor" *ngIf="video.title" (click)="onTitleClick()">{{video.title}}</h3>
+                    <div *ngIf="!video.title" class="form-group">
                         <input type="input" class="form-control" id="title" required placeholder="title" [(ngModel)]="video.title">
                     </div>
                     <div class="form-group">
@@ -35,25 +33,32 @@ import {Video} from './video';
     `
 })
 
-export class VideoDetailComponent{
-    video:Video;
-    private editTitle:boolean = false;
-    private closeForm = new EventEmitter();
+export class VideoDetailComponent implements OnInit {
+    @Input()
+    video:Video;    
+    editTitle:boolean = false;
+    @Output()
+    close = new EventEmitter();    
     
-    constructor(){
-        this.editTitle = false;
+    constructor(){   
+                    
+             
     }
     onTitleClick(){
         this.editTitle = true;
     }
     onButtonOkClick(){
         this.editTitle = false;
-        this.closeForm.next({});
+        this.close.next(null);
     }
     ngOnChanges(){
         this.editTitle = false;
     }
     onButtonCancelClick(){
-        this.closeForm.next({});
+        this.close.next({});
+    }
+    
+    ngOnInit(){
+        console.log(' '+this.editTitle);        
     }
 }
