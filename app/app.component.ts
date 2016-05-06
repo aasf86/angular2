@@ -24,9 +24,9 @@ export class AppComponent
     
     constructor(){
         this.videos = [
-            new Video(1,"Test", "www.google.com.br", "Test no google"),
-            new Video(2, "Test2", "www.tjmt.jus.br"),
-            new Video(3, "Test3", "www.tjmt.jus.br3")  
+            new Video(1,"Git", "https://www.youtube.com/embed/C18qzn7j4SM", "Rodrigo Branas (git)"),
+            new Video(2, "Gulp vs Grunt", "https://www.youtube.com/embed/ZG0fSXOKcGM", "Rodrigo Branas (Gulp vs Grunt)"),
+            new Video(3, "Bower", "https://www.youtube.com/embed/ZA06skH73gg", "Rodrigo Branas (Bower)")  
         ];
     }
     

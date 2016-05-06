@@ -34,9 +34,9 @@ System.register(['angular2/core', './config.service', './video', './videolist.co
                 function AppComponent() {
                     this.title = config_service_1.Config.TITLE_PAGE;
                     this.videos = [
-                        new video_1.Video(1, "Test", "www.google.com.br", "Test no google"),
-                        new video_1.Video(2, "Test2", "www.tjmt.jus.br"),
-                        new video_1.Video(3, "Test3", "www.tjmt.jus.br3")
+                        new video_1.Video(1, "Git", "https://www.youtube.com/embed/C18qzn7j4SM", "Rodrigo Branas (git)"),
+                        new video_1.Video(2, "Gulp vs Grunt", "https://www.youtube.com/embed/ZG0fSXOKcGM", "Rodrigo Branas (Gulp vs Grunt)"),
+                        new video_1.Video(3, "Bower", "https://www.youtube.com/embed/ZA06skH73gg", "Rodrigo Branas (Bower)")
                     ];
                 }
                 AppComponent.prototype.onSelectVideo = function (video) {
