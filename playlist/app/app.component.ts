@@ -1,8 +1,8 @@
 import {Component} from 'angular2/core';
-import {Config} from './config.service';
-import {Video} from './video';
-import {VideoListComponent} from './videolist.component';
-import {VideoDetailComponent} from './videodetail.component';
+import {Config} from '././config.service';
+import {Video} from '././video';
+import {VideoListComponent} from '././videolist.component';
+import {VideoDetailComponent} from '././videodetail.component';
 
 enum EstadoTela
 {

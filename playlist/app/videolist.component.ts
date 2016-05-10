@@ -5,7 +5,7 @@ import {
     Input
 } from 'angular2/core';
 
-import {Video} from './video'
+import {Video} from '././video'
 
 @Component({
     selector: 'video-list',
