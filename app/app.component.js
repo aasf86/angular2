@@ -76,26 +76,30 @@ System.register(['angular2/core', './config.service', './video', './videolist.co
                     this.estado = EstadoTela.Editando;
                     this.selectedVideo = itemVideo;
                 };
+                AppComponent.prototype.onAddNovo = function (newItem) {
+                    this.videos.push(newItem);
+                    this.onCloseAddForm();
+                };
                 AppComponent.prototype.onCloseDetailForm = function (event) {
                     console.log('fechando...');
                     this.selectedVideo = null;
                     this.videos.forEach(function (item) { item["selected"] = false; });
                     this.estado = EstadoTela.Fechado;
                 };
-                AppComponent.prototype.onCloseAddForm = function (event) {
+                AppComponent.prototype.onCloseAddForm = function () {
                     this.adicionando = false;
                     this.estado = EstadoTela.Fechado;
                 };
                 AppComponent.prototype.onAddVideo = function () {
                     this.estado = EstadoTela.Novo;
                     this.adicionando = true;
-                    this.newVideo = new video_1.Video(0, '', '');
+                    this.newVideo = new video_1.Video(this.videos.length, '', '');
                 };
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
                         directives: [videolist_component_1.VideoListComponent, videodetail_component_1.VideoDetailComponent],
-                        template: "\n        <h1 class=\"jumbotron\">\n            {{title}}\n        </h1>\n        <video-list [videos]=\"videos\" (selectVideo)=\"onSelectVideo($event)\"></video-list>\n        <video-detail *ngIf=\"showEditando\" [video]=\"selectedVideo\" (close)=\"onCloseDetailForm($event)\"></video-detail>\n        <video-detail *ngIf=\"showNovo\" [video]=\"newVideo\" (close)=\"onCloseAddForm($event)\"></video-detail>\n        <button *ngIf=\"showButtonNovo\" type=\"button\" class=\"btn btn-primary\" (click)=\"onAddVideo()\">\n            <i class=\"glyphicon glyphicon-plus\"></i>&nbsp;Novo\n        </button>\n    "
+                        template: "\n        <h1 class=\"jumbotron\">\n            {{title}}\n        </h1>\n        <video-list [videos]=\"videos\" (selectVideo)=\"onSelectVideo($event)\"></video-list>\n        <video-detail *ngIf=\"showEditando\" [video]=\"selectedVideo\" (close)=\"onCloseDetailForm($event)\"></video-detail>\n        <video-detail *ngIf=\"showNovo\" [video]=\"newVideo\" (close)=\"onCloseAddForm($event)\" [newItem]=\"true\" (adding)=\"onAddNovo($event)\"></video-detail>\n        <button *ngIf=\"showButtonNovo\" type=\"button\" class=\"btn btn-primary\" (click)=\"onAddVideo()\">\n            <i class=\"glyphicon glyphicon-plus\"></i>&nbsp;Novo\n        </button>\n    "
                     }), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);

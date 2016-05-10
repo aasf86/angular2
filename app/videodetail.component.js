@@ -24,7 +24,9 @@ System.register(['angular2/core', './video'], function(exports_1, context_1) {
             VideoDetailComponent = (function () {
                 function VideoDetailComponent() {
                     this.editTitle = false;
+                    this.newItem = false;
                     this.close = new core_1.EventEmitter();
+                    this.adding = new core_1.EventEmitter();
                 }
                 VideoDetailComponent.prototype.onTitleClick = function () {
                     this.editTitle = true;
@@ -39,6 +41,11 @@ System.register(['angular2/core', './video'], function(exports_1, context_1) {
                 VideoDetailComponent.prototype.onButtonCancelClick = function () {
                     this.close.next({});
                 };
+                VideoDetailComponent.prototype.onAdding = function () {
+                    console.log('adicionando....');
+                    this.video.id += 1;
+                    this.adding.next(this.video);
+                };
                 VideoDetailComponent.prototype.ngOnInit = function () {
                     console.log(' ' + this.editTitle);
                 };
@@ -47,13 +54,21 @@ System.register(['angular2/core', './video'], function(exports_1, context_1) {
                     __metadata('design:type', video_1.Video)
                 ], VideoDetailComponent.prototype, "video", void 0);
                 __decorate([
+                    core_1.Input(), 
+                    __metadata('design:type', Boolean)
+                ], VideoDetailComponent.prototype, "newItem", void 0);
+                __decorate([
                     core_1.Output(), 
                     __metadata('design:type', Object)
                 ], VideoDetailComponent.prototype, "close", void 0);
+                __decorate([
+                    core_1.Output(), 
+                    __metadata('design:type', Object)
+                ], VideoDetailComponent.prototype, "adding", void 0);
                 VideoDetailComponent = __decorate([
                     core_1.Component({
                         selector: 'video-detail',
-                        template: "\n        <style>\n            .h3Cursor {\n                cursor:pointer;                \n            }\n        </style>    \n        <div class=\"row\">\n            <div class=\"col-md-4\">\n                <iframe width=\"100%\" height=\"300\" src=\"{{video.url}}\"></iframe>\n            </div>\n            <div class=\"col-md-8\">\n                <form>                    \n                    <h3 class=\"h3Cursor\" *ngIf=\"video.title\" (click)=\"onTitleClick()\">{{video.title}}</h3>\n                    <div *ngIf=\"!video.title\" class=\"form-group\">\n                        <input type=\"input\" class=\"form-control\" id=\"title\" required placeholder=\"title\" [(ngModel)]=\"video.title\">\n                    </div>\n                    <div class=\"form-group\">\n                        <input type=\"input\" class=\"form-control\" id=\"url\" required placeholder=\"url\" [(ngModel)]=\"video.url\">\n                    </div>\n                    <div class=\"form-group\">\n                        <textarea class=\"form-control\" rows=\"5\" [(ngModel)]=\"video.desc\"></textarea>\n                    </div>\n                    <button type=\"button\" class=\"btn btn-success\" (click)=\"onButtonOkClick()\">Ok</button>\n                    <button type=\"button\" class=\"btn btn-danger\" (click)=\"onButtonCancelClick()\">Cancelar</button>\n                </form>\n            </div>\n        </div>\n    "
+                        template: "\n        <style>\n            .h3Cursor {\n                cursor:pointer;                \n            }\n        </style>    \n        <div class=\"row\">\n            <div class=\"col-md-4\">\n                <iframe width=\"100%\" height=\"300\" src=\"{{video.url}}\"></iframe>\n            </div>\n            <div class=\"col-md-8\">\n                <form>                    \n                    <h3 class=\"h3Cursor\" *ngIf=\"editTitle\" (click)=\"onTitleClick()\">{{video.title}}</h3>\n                    <div *ngIf=\"!editTitle\" class=\"form-group\">\n                        <input type=\"input\" class=\"form-control\" id=\"title\" required placeholder=\"title\" [(ngModel)]=\"video.title\">\n                    </div>\n                    <div class=\"form-group\">\n                        <input type=\"input\" class=\"form-control\" id=\"url\" required placeholder=\"url\" [(ngModel)]=\"video.url\">\n                    </div>\n                    <div class=\"form-group\">\n                        <textarea class=\"form-control\" rows=\"5\" [(ngModel)]=\"video.desc\"></textarea>\n                    </div>\n                    <button *ngIf=\"!newItem\" type=\"button\" class=\"btn btn-success\" (click)=\"onButtonOkClick()\">Ok</button>\n                    <button *ngIf=\"newItem\" type=\"button\" class=\"btn btn-primary\" (click)=\"onAdding()\">\n                        <i class=\"glyphicon glyphicon-plus\"></i>&nbsp;Adicionar\n                    </button>\n                    <button type=\"button\" class=\"btn btn-danger\" (click)=\"onButtonCancelClick()\">Cancelar</button>\n                </form>\n            </div>\n        </div>\n    "
                     }), 
                     __metadata('design:paramtypes', [])
                 ], VideoDetailComponent);

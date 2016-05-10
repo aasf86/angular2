@@ -20,7 +20,7 @@ enum EstadoTela
         </h1>
         <video-list [videos]="videos" (selectVideo)="onSelectVideo($event)"></video-list>
         <video-detail *ngIf="showEditando" [video]="selectedVideo" (close)="onCloseDetailForm($event)"></video-detail>
-        <video-detail *ngIf="showNovo" [video]="newVideo" (close)="onCloseAddForm($event)"></video-detail>
+        <video-detail *ngIf="showNovo" [video]="newVideo" (close)="onCloseAddForm($event)" [newItem]="true" (adding)="onAddNovo($event)"></video-detail>
         <button *ngIf="showButtonNovo" type="button" class="btn btn-primary" (click)="onAddVideo()">
             <i class="glyphicon glyphicon-plus"></i>&nbsp;Novo
         </button>
@@ -66,6 +66,12 @@ export class AppComponent
         this.selectedVideo = itemVideo;
     }
     
+    onAddNovo(newItem:Video){
+        
+        this.videos.push(newItem);
+        this.onCloseAddForm();
+    }
+    
     onCloseDetailForm(event){
         console.log('fechando...');
         this.selectedVideo = null;
@@ -73,13 +79,14 @@ export class AppComponent
         this.estado = EstadoTela.Fechado;       
     }
     
-    onCloseAddForm(event){
+    onCloseAddForm(){
         this.adicionando = false;
         this.estado = EstadoTela.Fechado;
     }
+    
     onAddVideo(){
         this.estado = EstadoTela.Novo;
         this.adicionando = true;
-        this.newVideo = new Video(0,'','');
+        this.newVideo = new Video(this.videos.length,'','');
     }
 }
