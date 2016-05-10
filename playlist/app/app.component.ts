@@ -8,7 +8,8 @@ enum EstadoTela
 {
     Fechado,
     Novo,
-    Editando
+    Editando, 
+    Removido
 }
 
 @Component({    
@@ -18,7 +19,7 @@ enum EstadoTela
         <h1 class="jumbotron">
             {{title}}
         </h1>
-        <video-list [videos]="videos" (selectVideo)="onSelectVideo($event)"></video-list>
+        <video-list [videos]="videos" (selectVideo)="onSelectVideo($event)" (removeVideo)="onRemoveVideo($event)"></video-list>
         <video-detail *ngIf="showEditando" [video]="selectedVideo" (close)="onCloseDetailForm($event)"></video-detail>
         <video-detail *ngIf="showNovo" [video]="newVideo" (close)="onCloseAddForm($event)" [newItem]="true" (adding)="onAddNovo($event)"></video-detail>
         <button *ngIf="showButtonNovo" type="button" class="btn btn-primary" (click)="onAddVideo()">
@@ -56,14 +57,33 @@ export class AppComponent
         ];
     }
     
-    onSelectVideo(itemVideo:Video){
-        //--console.log(JSON.stringify(video));
+    onSelectVideo(event){
+        console.log('select');
         this.videos.forEach(item => {
             item["selected"] = false;
         });
-        itemVideo["selected"] = true;
+        
+        if (this.estado == EstadoTela.Removido) {            
+            event.event.preventDefault();
+            this.estado = EstadoTela.Editando;
+            this.onCloseAddForm();
+            return;
+        }
+        
+        event.itemVideo["selected"] = true;
         this.estado = EstadoTela.Editando;    
-        this.selectedVideo = itemVideo;
+        this.selectedVideo = event.itemVideo;
+    }
+    
+    onRemoveVideo(event){
+        this.estado = EstadoTela.Removido;
+        console.log('remove');
+        if (confirm('Deseja realmente apagar \'' + event.itemVideo.title + ' - ' + event.itemVideo.url+'\'?')) {
+            console.log('apagando');
+            this.videos = this.videos.filter(x=> x.id != event.itemVideo.id);
+            this.onCloseAddForm();
+            this.estado = EstadoTela.Removido;
+        }
     }
     
     onAddNovo(newItem:Video){
@@ -76,12 +96,13 @@ export class AppComponent
         console.log('fechando...');
         this.selectedVideo = null;
         this.videos.forEach(item => { item["selected"] = false; });
-        this.estado = EstadoTela.Fechado;       
+        this.estado = EstadoTela.Fechado;
     }
     
     onCloseAddForm(){
         this.adicionando = false;
         this.estado = EstadoTela.Fechado;
+        this.selectedVideo = null;
     }
     
     onAddVideo(){

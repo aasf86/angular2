@@ -34,6 +34,7 @@ System.register(['angular2/core', './config.service', './video', './videolist.co
                 EstadoTela[EstadoTela["Fechado"] = 0] = "Fechado";
                 EstadoTela[EstadoTela["Novo"] = 1] = "Novo";
                 EstadoTela[EstadoTela["Editando"] = 2] = "Editando";
+                EstadoTela[EstadoTela["Removido"] = 3] = "Removido";
             })(EstadoTela || (EstadoTela = {}));
             AppComponent = (function () {
                 function AppComponent() {
@@ -67,14 +68,30 @@ System.register(['angular2/core', './config.service', './video', './videolist.co
                     enumerable: true,
                     configurable: true
                 });
-                AppComponent.prototype.onSelectVideo = function (itemVideo) {
-                    //--console.log(JSON.stringify(video));
+                AppComponent.prototype.onSelectVideo = function (event) {
+                    console.log('select');
                     this.videos.forEach(function (item) {
                         item["selected"] = false;
                     });
-                    itemVideo["selected"] = true;
+                    if (this.estado == EstadoTela.Removido) {
+                        event.event.preventDefault();
+                        this.estado = EstadoTela.Editando;
+                        this.onCloseAddForm();
+                        return;
+                    }
+                    event.itemVideo["selected"] = true;
                     this.estado = EstadoTela.Editando;
-                    this.selectedVideo = itemVideo;
+                    this.selectedVideo = event.itemVideo;
+                };
+                AppComponent.prototype.onRemoveVideo = function (event) {
+                    this.estado = EstadoTela.Removido;
+                    console.log('remove');
+                    if (confirm('Deseja realmente apagar \'' + event.itemVideo.title + ' - ' + event.itemVideo.url + '\'?')) {
+                        console.log('apagando');
+                        this.videos = this.videos.filter(function (x) { return x.id != event.itemVideo.id; });
+                        this.onCloseAddForm();
+                        this.estado = EstadoTela.Removido;
+                    }
                 };
                 AppComponent.prototype.onAddNovo = function (newItem) {
                     this.videos.push(newItem);
@@ -89,6 +106,7 @@ System.register(['angular2/core', './config.service', './video', './videolist.co
                 AppComponent.prototype.onCloseAddForm = function () {
                     this.adicionando = false;
                     this.estado = EstadoTela.Fechado;
+                    this.selectedVideo = null;
                 };
                 AppComponent.prototype.onAddVideo = function () {
                     this.estado = EstadoTela.Novo;
@@ -99,7 +117,7 @@ System.register(['angular2/core', './config.service', './video', './videolist.co
                     core_1.Component({
                         selector: 'my-app',
                         directives: [videolist_component_1.VideoListComponent, videodetail_component_1.VideoDetailComponent],
-                        template: "\n        <h1 class=\"jumbotron\">\n            {{title}}\n        </h1>\n        <video-list [videos]=\"videos\" (selectVideo)=\"onSelectVideo($event)\"></video-list>\n        <video-detail *ngIf=\"showEditando\" [video]=\"selectedVideo\" (close)=\"onCloseDetailForm($event)\"></video-detail>\n        <video-detail *ngIf=\"showNovo\" [video]=\"newVideo\" (close)=\"onCloseAddForm($event)\" [newItem]=\"true\" (adding)=\"onAddNovo($event)\"></video-detail>\n        <button *ngIf=\"showButtonNovo\" type=\"button\" class=\"btn btn-primary\" (click)=\"onAddVideo()\">\n            <i class=\"glyphicon glyphicon-plus\"></i>&nbsp;Novo\n        </button>\n    "
+                        template: "\n        <h1 class=\"jumbotron\">\n            {{title}}\n        </h1>\n        <video-list [videos]=\"videos\" (selectVideo)=\"onSelectVideo($event)\" (removeVideo)=\"onRemoveVideo($event)\"></video-list>\n        <video-detail *ngIf=\"showEditando\" [video]=\"selectedVideo\" (close)=\"onCloseDetailForm($event)\"></video-detail>\n        <video-detail *ngIf=\"showNovo\" [video]=\"newVideo\" (close)=\"onCloseAddForm($event)\" [newItem]=\"true\" (adding)=\"onAddNovo($event)\"></video-detail>\n        <button *ngIf=\"showButtonNovo\" type=\"button\" class=\"btn btn-primary\" (click)=\"onAddVideo()\">\n            <i class=\"glyphicon glyphicon-plus\"></i>&nbsp;Novo\n        </button>\n    "
                     }), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);

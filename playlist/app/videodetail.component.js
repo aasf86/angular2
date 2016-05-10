@@ -47,7 +47,7 @@ System.register(['angular2/core', './video'], function(exports_1, context_1) {
                     this.adding.next(this.video);
                 };
                 VideoDetailComponent.prototype.ngOnInit = function () {
-                    console.log(' ' + this.editTitle);
+                    //console.log(' '+this.editTitle);        
                 };
                 __decorate([
                     core_1.Input(), 

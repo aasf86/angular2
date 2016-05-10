@@ -72,6 +72,6 @@ export class VideoDetailComponent implements OnInit {
     }
     
     ngOnInit(){
-        console.log(' '+this.editTitle);        
+        //console.log(' '+this.editTitle);        
     }
 }
