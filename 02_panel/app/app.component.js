@@ -29,7 +29,7 @@ System.register(['angular2/core', './container'], function(exports_1, context_1)
                     core_1.Component({
                         selector: 'my-app',
                         directives: [container_1.Panel],
-                        template: "\n        <br/> \n        <panel title={{tituloPainel}}>\n            <h3>Compo do Painel</h3>\n            <button>n\u00E3o clique aqui</button>\n            <panel title=\"Step 1\">\n                Open a terminal\n            </panel>\n            <panel title=\"Step 2\">\n                Say hello world!\n            </panel>            \n        </panel>\n    "
+                        template: ("\n        <br/> \n        <panel title={{tituloPainel}}>\n            <h3>Compo do Painel</h3>\n            <button>n\u00E3o clique aqui</button>\n            <panel title=\"Step 1\">\n                Open a terminal\n            </panel>\n            <panel title=\"Step 2\">\n                Say hello world! testando highlighted  \n            </panel>            \n        </panel>\n    ")
                     }), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);

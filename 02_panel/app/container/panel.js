@@ -29,7 +29,7 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 Panel = __decorate([
                     core_1.Component({
                         selector: 'panel',
-                        template: "\n        <div class=\"panel panel-default\">\n            <div class=\"panel-heading\" *ngIf=\"title\"><h1>{{title}}</h1></div>\n            <div class=\"panel-body\">\n                <ng-content></ng-content>\n            </div>\n        </div>\n    "
+                        template: ("\n        <div class=\"panel panel-default\">\n            <div class=\"panel-heading\" *ngIf=\"title\"><h1>{{title}}</h1></div>\n            <div class=\"panel-body\">\n                <ng-content></ng-content>\n            </div>\n        </div>\n    ")
                     }), 
                     __metadata('design:paramtypes', [])
                 ], Panel);

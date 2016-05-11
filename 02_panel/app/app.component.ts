@@ -5,7 +5,7 @@ import {Panel} from './container'
 @Component({    
     selector: 'my-app',
     directives: [Panel],
-    template: `
+    template: (`
         <br/> 
         <panel title={{tituloPainel}}>
             <h3>Compo do Painel</h3>
@@ -14,10 +14,10 @@ import {Panel} from './container'
                 Open a terminal
             </panel>
             <panel title="Step 2">
-                Say hello world!
+                Say hello world! testando highlighted  
             </panel>            
         </panel>
-    `
+    `)
 })
 
 export class AppComponent 
