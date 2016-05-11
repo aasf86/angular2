@@ -15,7 +15,7 @@ enum EstadoTela
 @Component({    
     selector: 'my-app',
     directives: [VideoListComponent,VideoDetailComponent],
-    template: `
+    template: (`
         <h1 class="jumbotron">
             {{title}}
         </h1>
@@ -25,7 +25,7 @@ enum EstadoTela
         <button *ngIf="showButtonNovo" type="button" class="btn btn-primary" (click)="onAddVideo()">
             <i class="glyphicon glyphicon-plus"></i>&nbsp;Novo
         </button>
-    `
+    `)
 })
 
 export class AppComponent 

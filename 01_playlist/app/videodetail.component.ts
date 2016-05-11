@@ -3,7 +3,7 @@ import {Video} from '././video';
 
 @Component({
     selector:'video-detail',    
-    template: `
+    template: (`
         <style>
             .h3Cursor {
                 cursor:pointer;                
@@ -33,7 +33,7 @@ import {Video} from '././video';
                 </form>
             </div>
         </div>
-    `
+    `)
 })
 
 export class VideoDetailComponent implements OnInit {

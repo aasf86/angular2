@@ -23,8 +23,11 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                     this.selectVideo = new core_1.EventEmitter();
                     this.removeVideo = new core_1.EventEmitter();
                 }
+                VideoListComponent.prototype.getClassTr = function (index, className) {
+                    console.log();
+                    return index % 2 == 0 ? className + ' zebra' : className;
+                };
                 VideoListComponent.prototype.onSelect = function (itemVideo, event) {
-                    //console.log(JSON.stringify(vid));        
                     this.selectVideo.next({ itemVideo: itemVideo, event: event });
                 };
                 VideoListComponent.prototype.onRemover = function (itemVideo) {
@@ -41,7 +44,7 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 VideoListComponent = __decorate([
                     core_1.Component({
                         selector: 'video-list',
-                        template: "\n        <style>\n            .howTr {\n                cursor:pointer;                \n            }\n            .howTr:hover{\n                background-color: #fcf8e3 !important;\n            }\n        </style>\n        <table class=\"table\">\n            <thead>\n                <tr>\n                    <th>#ID</th>\n                    <th>Titulo</th>\n                    <th>Autor</th>\n                    <th width=\"3%\"></th>\n                </tr>\n            </thead>\n            <tbody>\n                <tr *ngFor=\"#v of videos\" (click)=\"onSelect(v, $event)\" class='{{v[\"selected\"] ? \"info howTr\" : \"howTr\" }}'>\n                    <td>{{v.id}}</td>\n                    <td>{{v.title}}</td>\n                    <td>{{v.desc}}</td>\n                    <td>\n                        <button type=\"button\" class=\"btn btn-danger\" title=\"Remover item\" (click)=\"onRemover(v, $event)\">\n                            <i class=\"glyphicon glyphicon-remove\"></i>\n                        </button>                    \n                    </td>\n                </tr>\n            </tbody>\n        </table>\n        ",
+                        template: ("\n        <style>\n            .howTr {\n                cursor:pointer;                \n            }\n            .howTr:hover{\n                background-color: #fcf8e3 !important;\n            }\n            .zebra {\n                background-color: lightgray;\n            }\n        </style>\n        <div class=\"table-responsive\">\n            <table class=\"table\">\n                <thead>\n                    <tr>\n                        <th>#ID</th>\n                        <th>Titulo</th>\n                        <th>Autor</th>\n                        <th width=\"3%\"></th>\n                    </tr>\n                </thead>\n                <tbody>\n                    <tr *ngFor=\"#v of videos, #i=index\" (click)=\"onSelect(v, $event)\" class='{{v[\"selected\"] ? getClassTr(i, \"info howTr\") : getClassTr(i, \"howTr\") }}'>\n                        <td>{{v.id}}</td>\n                        <td>{{v.title}}</td>\n                        <td>{{v.desc}}</td>\n                        <td>\n                            <button type=\"button\" class=\"btn btn-danger\" title=\"Remover item\" (click)=\"onRemover(v, $event)\">\n                                <i class=\"glyphicon glyphicon-remove\"></i>\n                            </button>\n                        </td>\n                    </tr>\n                </tbody>\n            </table>\n        </div>\n        "),
                         inputs: ['videos']
                     }), 
                     __metadata('design:paramtypes', [])
