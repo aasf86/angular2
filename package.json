@@ -4,7 +4,7 @@
   "description": "aprendendo angular 2",
   "main": "index.js",
   "scripts": {
-    "start": "live-server --port=12345"
+    "start": "live-server --port=8080"
   },
   "repository": {
     "type": "git",

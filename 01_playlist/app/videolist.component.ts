@@ -32,7 +32,7 @@ import {Video} from '././video'
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="#v of videos, #i=index" (click)="onSelect(v, $event)" class='{{v["selected"] ? getClassTr(i, "info howTr") : getClassTr(i, "howTr") }}'>
+                    <tr *ngFor="let v of videos, let i = index" (click)="onSelect(v, $event)" class='{{v["selected"] ? getClassTr(i, "info howTr") : getClassTr(i, "howTr") }}'>
                         <td>{{v.id}}</td>
                         <td>{{v.title}}</td>
                         <td>{{v.desc}}</td>
