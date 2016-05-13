@@ -23,7 +23,7 @@ enum EstadoTela
         <video-detail *ngIf="showEditando" [video]="selectedVideo" (close)="onCloseDetailForm($event)"></video-detail>
         <video-detail *ngIf="showNovo" [video]="newVideo" (close)="onCloseAddForm($event)" [newItem]="true" (adding)="onAddNovo($event)"></video-detail>
         <button *ngIf="showButtonNovo" type="button" class="btn btn-primary" (click)="onAddVideo()">
-            <i class="glyphicon glyphicon-plus"></i>&nbsp;Novo
+            <i class="glyphicon glyphicon-plus"></i>&nbsp;Novoasdf
         </button>
     `)
 })
