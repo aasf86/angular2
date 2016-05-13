@@ -25,10 +25,20 @@ System.register(['angular2/core', './mock'], function(exports_1, context_1) {
                 function AppComponent(_mock) {
                     this.user = _mock.mike;
                 }
+                AppComponent.prototype.onSubmit = function (f) {
+                    var _this = this;
+                    this.submitted = true;
+                    console.log(f);
+                    console.log("sending..." + JSON.stringify(this.user));
+                    setTimeout(function (x) {
+                        _this.submitted = false;
+                        console.log("x..." + JSON.stringify(x));
+                    }, 3000, this.user);
+                };
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
-                        template: ("\n    {{user | json}}\n    <style>\n    .ng-invalid {\n        border-left: 5px solid #a94442;\n    }    \n    </style>\n    <form>\n        <input type=\"hidden\" id=\"id\" name=\"id\" [(ngModel)]=\"user.id\"/>\n        <div class=\"form-group\">\n            <label for=\"name\">Name</label>\n            <input type=\"text\" class=\"form-control\" name=\"name\" required [(ngModel)]=\"user.name\" ngControl=\"name\" #name=\"ngForm\">\n            <div [hidden]=\"name.valid\" class=\"alert alert-danger\">\n                Nome inv\u00E1lido!\n            </div>\n        </div>\n        <div class=\"form-group\">\n            <label for=\"email\">Email</label>\n            <input type=\"text\" class=\"form-control\" required [(ngModel)]=\"user.email\">\n        </div>\n        <button type=\"submit\" class=\"btn btn-default\">Submit</button>\n    </form> \n\n    ")
+                        template: ("\n    {{user | json}}\n    <style>\n    .ng-invalid {\n        border-left: 5px solid #a94442;\n    }\n    </style>\n    <div [hidden]=\"submitted\"> \n        <form (ngSubmit)=\"onSubmit(form)\" #form=\"ngForm\">\n            <input type=\"hidden\" id=\"id\" name=\"id\" [(ngModel)]=\"user.id\"/>\n            <div class=\"form-group\">\n                <label for=\"name\">Nome</label>\n                <input type=\"text\" class=\"form-control\" name=\"name\" required [(ngModel)]=\"user.name\" ngControl=\"name\" #name=\"ngForm\">\n                <div [hidden]=\"name.valid\" class=\"alert alert-danger\">\n                    Nome inv\u00E1lido!\n                </div>\n            </div>\n            <div class=\"form-group\">\n                <label for=\"email\">Email</label>\n                <input type=\"text\" class=\"form-control\" required [(ngModel)]=\"user.email\">\n            </div>\n            <button type=\"submit\" class=\"btn btn-default\" [disabled]=\"!form.valid\">Salvar</button>\n        </form> \n    </div>\n    <div [hidden]=\"!submitted\">\n        Sending... {{user|json}}\n    </div>\n    ")
                     }), 
                     __metadata('design:paramtypes', [mock_1.Mock])
                 ], AppComponent);
